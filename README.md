@@ -29,7 +29,48 @@ Some prompts to answer:
 
 You can include a simple diagram or bullet list if helpful.
 
----
+How the system works
+What features does each Song use in your system
+
+genre
+mood
+energy
+tempo
+danceability
+keywords / descriptive tags
+acousticness is also available in the song data
+What information does your UserProfile store
+
+favorite_genre
+favorite_mood
+energy_level
+tempo
+danceability
+keywords
+likes
+How does your Recommender compute a score for each song
+
+It compares each song to the user profile
+Adds points for:
+genre match
+mood match
+energy similarity
+tempo similarity
+danceability similarity
+keyword or liked descriptor matches
+Example scoring:
++2.0 for genre match
++1.0 for mood match
+up to +1.0 for energy similarity
+up to +1.0 for tempo similarity
+up to +1.0 for danceability similarity
+a small bonus for keywords
+How do you choose which songs to recommend
+
+Score every song in songs.csv
+Sort songs by total score from highest to lowest
+Return the top K songs as recommendations
+
 
 ## Getting Started
 
