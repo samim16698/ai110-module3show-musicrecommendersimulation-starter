@@ -27,6 +27,12 @@ Some prompts to answer:
 - How does your `Recommender` compute a score for each song
 - How do you choose which songs to recommend
 
+
+Answer: Each Song uses features like genre, mood, energy, tempo, danceability, keywords, and acousticness.
+The UserProfile stores the user’s favorite genre, favorite mood, preferred energy level, preferred tempo, preferred danceability, favorite keywords, and likes.
+The Recommender scores each song by comparing it to the user profile and adding points for matching genre, mood, energy, tempo, danceability, and keywords.
+It recommends the songs with the highest scores, sorted from best to worst, and returns the top ones.
+
 You can include a simple diagram or bullet list if helpful.
 
 How the system works
@@ -69,8 +75,9 @@ How do you choose which songs to recommend
 
 Score every song in songs.csv
 Sort songs by total score from highest to lowest
-Return the top K songs as recommendations
+Return the top songs as recommendations
 
+A possible bias is that the recommender may favor songs that match the user’s current preferences too strongly, which could reduce variety and make the system feel repetitive. 
 
 ## Getting Started
 
@@ -109,15 +116,33 @@ You can add more tests in `tests/test_recommender.py`.
 
 ## Sample Recommendation Output
 
-Paste a sample of your recommender's output here as a text block so a reader can see what it produces:
+Here is a sample of the recommender output for the default pop/happy profile:
 
-```
-# e.g.:
-# User profile: genre=indie, mood=chill, energy=low
-# Recommendations:
-#   1. ...
-#   2. ...
-#   3. ...
+```text
+Loaded songs: 20
+
+Top recommendations:
+
+1. Sunrise City
+   Score: 4.98
+   Reasons: matches preferred genre (+2.0), matches preferred mood (+2.0), energy proximity (+0.98)
+   ----------------------------------------
+2. Rooftop Lights
+   Score: 2.96
+   Reasons: matches preferred mood (+2.0), energy proximity (+0.96)
+   ----------------------------------------
+3. Midnight Mirage
+   Score: 2.96
+   Reasons: matches preferred genre (+2.0), energy proximity (+0.96)
+   ----------------------------------------
+4. Gym Hero
+   Score: 2.87
+   Reasons: matches preferred genre (+2.0), energy proximity (+0.87)
+   ----------------------------------------
+5. Broken Halo
+   Score: 2.78
+   Reasons: matches preferred genre (+2.0), energy proximity (+0.78)
+   ----------------------------------------
 ```
 
 **Screenshot or video** *(optional)*: <!-- Insert a screenshot or demo video link here -->

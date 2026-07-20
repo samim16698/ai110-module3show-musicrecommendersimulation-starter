@@ -1,4 +1,4 @@
-from src.recommender import Song, UserProfile, Recommender
+from src.recommender import Song, UserProfile, Recommender, load_songs
 
 def make_small_recommender() -> Recommender:
     songs = [
@@ -59,3 +59,11 @@ def test_explain_recommendation_returns_non_empty_string():
     explanation = rec.explain_recommendation(user, song)
     assert isinstance(explanation, str)
     assert explanation.strip() != ""
+
+
+def test_load_songs_reports_loaded_count(capsys):
+    songs = load_songs("data/songs.csv")
+    captured = capsys.readouterr()
+
+    assert len(songs) > 0
+    assert f"Loaded songs: {len(songs)}" in captured.out
