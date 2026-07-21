@@ -1,5 +1,7 @@
 # 🎵 Music Recommender Simulation
 
+## Step 4 Phase 1: Sample Outputs
+
 ## Project Summary
 
 In this project you will build and explain a small music recommender system.
@@ -147,6 +149,35 @@ Top recommendations:
 
 **Screenshot or video** *(optional)*: <!-- Insert a screenshot or demo video link here -->
 
+### Edge-Case Profiles
+
+```text
+=== conflicting_profile ===
+1. Gym Hero | Score: 2.97 | matches preferred genre (+2.0), energy proximity (+0.97)
+2. Midnight Mirage | Score: 2.94 | matches preferred genre (+2.0), energy proximity (+0.94)
+3. Sunrise City | Score: 2.92 | matches preferred genre (+2.0), energy proximity (+0.92)
+4. Broken Halo | Score: 2.68 | matches preferred genre (+2.0), energy proximity (+0.68)
+5. Storm Runner | Score: 0.99 | energy proximity (+0.99)
+```
+
+```text
+=== extreme_energy_profile ===
+1. Midnight Coding | Score: 4.42 | matches preferred genre (+2.0), matches preferred mood (+2.0), energy proximity (+0.42)
+2. Library Rain | Score: 4.35 | matches preferred genre (+2.0), matches preferred mood (+2.0), energy proximity (+0.35)
+3. Focus Flow | Score: 2.40 | matches preferred genre (+2.0), energy proximity (+0.40)
+4. Spacewalk Thoughts | Score: 2.28 | matches preferred mood (+2.0), energy proximity (+0.28)
+5. Gym Hero | Score: 0.93 | energy proximity (+0.93)
+```
+
+```text
+=== unknown_genre_profile ===
+1. Heartland Road | Score: 0.96 | energy proximity (+0.96)
+2. Broken Halo | Score: 0.92 | energy proximity (+0.92)
+3. Midnight Coding | Score: 0.92 | energy proximity (+0.92)
+4. Focus Flow | Score: 0.90 | energy proximity (+0.90)
+5. Glow in the Dark | Score: 0.90 | energy proximity (+0.90)
+```
+
 ---
 
 ## Experiments You Tried
@@ -185,4 +216,14 @@ Write 1 to 2 paragraphs here about what you learned:
 - about where bias or unfairness could show up in systems like this
 
 
+# Personal Reflection
+What was your biggest learning moment during this project?
+How did using AI tools help you, and when did you need to double-check them?
+What surprised you about how simple algorithms can still "feel" like recommendations?
+What would you try next if you extended this project?
+
+- My biggest learning moment is how scoring systems are used in order rank reccomendatiosn for users. 
+- AI tool helped to refactor the codes. 
+- I was surprised how much work goes into something that looks simple from the outside. 
+- I would try and give more importance to mood for reccomendations. 
 

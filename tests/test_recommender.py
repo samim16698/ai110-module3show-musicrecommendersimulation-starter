@@ -61,6 +61,46 @@ def test_explain_recommendation_returns_non_empty_string():
     assert explanation.strip() != ""
 
 
+def test_recommend_prioritizes_energy_over_genre_when_weighted():
+    user = UserProfile(
+        favorite_genre="pop",
+        favorite_mood="happy",
+        target_energy=0.8,
+        likes_acoustic=False,
+    )
+    songs = [
+        Song(
+            id=1,
+            title="Genre Match",
+            artist="Artist",
+            genre="pop",
+            mood="happy",
+            energy=0.2,
+            tempo_bpm=120,
+            valence=0.8,
+            danceability=0.8,
+            acousticness=0.2,
+        ),
+        Song(
+            id=2,
+            title="Energy Match",
+            artist="Artist",
+            genre="jazz",
+            mood="happy",
+            energy=0.8,
+            tempo_bpm=120,
+            valence=0.8,
+            danceability=0.8,
+            acousticness=0.2,
+        ),
+    ]
+    rec = Recommender(songs)
+
+    results = rec.recommend(user, k=2)
+
+    assert results[0].title == "Energy Match"
+
+
 def test_load_songs_reports_loaded_count(capsys):
     songs = load_songs("data/songs.csv")
     captured = capsys.readouterr()

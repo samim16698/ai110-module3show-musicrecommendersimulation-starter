@@ -39,12 +39,39 @@ class Recommender:
         self.songs = songs
 
     def recommend(self, user: UserProfile, k: int = 5) -> List[Song]:
-        # TODO: Implement recommendation logic
-        return self.songs[:k]
+        scored_songs = []
+        for song in self.songs:
+            score, reasons = score_song(
+                {
+                    "genre": user.favorite_genre,
+                    "mood": user.favorite_mood,
+                    "energy": user.target_energy,
+                },
+                {
+                    "genre": song.genre,
+                    "mood": song.mood,
+                    "energy": song.energy,
+                },
+            )
+            scored_songs.append((song, score, reasons))
+
+        ranked_songs = sorted(scored_songs, key=lambda item: item[1], reverse=True)
+        return [song for song, _, _ in ranked_songs[:k]]
 
     def explain_recommendation(self, user: UserProfile, song: Song) -> str:
-        # TODO: Implement explanation logic
-        return "Explanation placeholder"
+        score, reasons = score_song(
+            {
+                "genre": user.favorite_genre,
+                "mood": user.favorite_mood,
+                "energy": user.target_energy,
+            },
+            {
+                "genre": song.genre,
+                "mood": song.mood,
+                "energy": song.energy,
+            },
+        )
+        return f"Score: {score:.2f}. " + "; ".join(reasons)
 
 def load_songs(csv_path: str) -> List[Dict]:
     """Load songs from a CSV file into a list of dictionaries."""
@@ -76,8 +103,8 @@ def score_song(user_prefs: Dict, song: Dict) -> Tuple[float, List[str]]:
     reasons: List[str] = []
 
     if song.get("genre") == user_prefs.get("genre"):
-        score += 2.0
-        reasons.append("matches preferred genre (+2.0)")
+        score += 1.0
+        reasons.append("matches preferred genre (+1.0)")
 
     if song.get("mood") == user_prefs.get("mood"):
         score += 2.0
@@ -87,8 +114,8 @@ def score_song(user_prefs: Dict, song: Dict) -> Tuple[float, List[str]]:
     target_energy = user_prefs.get("energy", 0.0)
     energy_diff = abs(energy - target_energy)
     energy_score = max(0.0, 1.0 - energy_diff)
-    score += energy_score
-    reasons.append(f"energy proximity (+{energy_score:.2f})")
+    score += energy_score * 2.0
+    reasons.append(f"energy proximity (+{energy_score * 2.0:.2f})")
 
     return score, reasons
 
